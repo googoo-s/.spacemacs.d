@@ -38,7 +38,7 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ivy
+     helm
      auto-completion
      better-defaults
      emacs-lisp
@@ -76,8 +76,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(
-                                    org-contrib)
+   dotspacemacs-excluded-packages '(org-contrib)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -104,7 +103,7 @@ It should only modify the values of Spacemacs settings."
    ;; regardless of the following setting when native compilation is in effect.
    ;;
    ;; (default nil)
-   dotspacemacs-enable-emacs-pdumper nil
+   dotspacemacs-enable-emacs-pdumper nil 
 
    ;; Name of executable file pointing to emacs 27+. This executable must be
    ;; in your PATH.
@@ -172,7 +171,7 @@ It should only modify the values of Spacemacs settings."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
 
    ;; If non-nil show the version string in the Spacemacs buffer. It will
    ;; appear as (spacemacs version)@(emacs version)
@@ -185,7 +184,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner 'random
 
    ;; Scale factor controls the scaling (size) of the startup banner. Default
    ;; value is `auto' for scaling the logo automatically to fit all buffer
@@ -204,8 +203,8 @@ It should only modify the values of Spacemacs settings."
    ;; pair of numbers, e.g. `(recents-by-project . (7 .  5))', where the first
    ;; number is the project limit and the second the limit on the recent files
    ;; within a project.
-   dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 7))
+   dotspacemacs-startup-lists '((recents . 10)
+                                (projects . 10))
 
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
@@ -255,7 +254,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(vim-powerline :separator wave :separator-scale 1.0)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -265,7 +264,7 @@ It should only modify the values of Spacemacs settings."
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 15.0
+                               :size 14.0
                                :weight normal
                                :width normal)
 
@@ -421,7 +420,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t 
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -486,7 +485,7 @@ It should only modify the values of Spacemacs settings."
    ;; performance issues, instead of calculating the frame title by
    ;; `spacemacs/title-prepare' all the time.
    ;; (default "%I@%S")
-   dotspacemacs-frame-title-format "%t-----%b"
+   dotspacemacs-frame-title-format "%t..%b"
 
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
@@ -574,16 +573,16 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (if (eq system-type 'darwin)
-    ; something for OS X 
+    ;; something for OS X 
     (setq w32-apps-modifier 'super)       ; 通过SharpKeys改成了 Application 
-  )
+    )
   (if (or (eq system-type 'ms-dos) (eq system-type 'windows-nt))
-      ; something for windows 
+      ;; something for windows 
       (setq mac-option-modifier 'meta
             mac-command-modifier 'super)
       )
-  (if (eq system-type 'gnu/linux)
-      )
+  ;;(if (eq system-type 'gnu/linux)
+  ;;    )
   (global-set-key (kbd "s-a") 'mark-whole-buffer) ;;对应Windows上面的Ctrl-a 全选
   (global-set-key (kbd "s-c") 'kill-ring-save) ;;对应Windows上面的Ctrl-c 复制
   (global-set-key (kbd "s-s") 'save-buffer) ;; 对应Windows上面的Ctrl-s 保存
@@ -604,7 +603,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(docker tablist aio docker-tramp dockerfile-mode kubernetes-evil kubernetes magit-popup kubernetes-tramp nose company-anaconda go-tag groovy-imports importmagic epc ctable concurrent lsp-java blacken code-cells anaconda-mode company-go cython-mode go-eldoc go-fill-struct go-gen-test go-guru go-impl go-rename go-mode godoctor pcache groovy-mode deferred live-py-mode dap-mode lsp-docker bui yaml lsp-pyright lsp-python-ms maven-test-mode mvn pip-requirements pipenv load-env-vars pippel poetry pony-mode py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc yapfify counsel-projectile counsel flyspell-correct-ivy ivy-avy ivy-hydra ivy-purpose ivy-xref ivy-yasnippet lsp-ivy smex swiper ivy wgrep auto-complete auto-dictionary auto-yasnippet browse-at-remote esh-help eshell-prompt-extras eshell-z evil-org pos-tip flyspell-correct fuzzy gh-md git-gutter git-link git-messenger git-modes git-timemachine gitignore-templates gnuplot helm-c-yasnippet company helm-git-grep helm-ls-git helm-lsp helm-org-rifle htmlize origami lsp-treemacs lsp-mode markdown-toc markdown-mode mmm-mode multi-term mwim org-cliplink org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-category-capture org-rich-yank orgit shell-pop smeargle terminal-here treemacs-magit magit magit-section git-commit with-editor transient unfill xterm-color yasnippet-snippets yasnippet ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(flyspell-correct-helm helm-company helm-pydoc helm helm-core docker tablist aio docker-tramp dockerfile-mode kubernetes-evil kubernetes magit-popup kubernetes-tramp nose company-anaconda go-tag groovy-imports importmagic epc ctable concurrent lsp-java blacken code-cells anaconda-mode company-go cython-mode go-eldoc go-fill-struct go-gen-test go-guru go-impl go-rename go-mode godoctor pcache groovy-mode deferred live-py-mode dap-mode lsp-docker bui yaml lsp-pyright lsp-python-ms maven-test-mode mvn pip-requirements pipenv load-env-vars pippel poetry pony-mode py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc yapfify counsel-projectile counsel flyspell-correct-ivy ivy-avy ivy-hydra ivy-purpose ivy-xref ivy-yasnippet lsp-ivy smex swiper ivy wgrep auto-complete auto-dictionary auto-yasnippet browse-at-remote esh-help eshell-prompt-extras eshell-z evil-org pos-tip flyspell-correct fuzzy gh-md git-gutter git-link git-messenger git-modes git-timemachine gitignore-templates gnuplot helm-c-yasnippet company helm-git-grep helm-ls-git helm-lsp helm-org-rifle htmlize origami lsp-treemacs lsp-mode markdown-toc markdown-mode mmm-mode multi-term mwim org-cliplink org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-category-capture org-rich-yank orgit shell-pop smeargle terminal-here treemacs-magit magit magit-section git-commit with-editor transient unfill xterm-color yasnippet-snippets yasnippet ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
