@@ -192,7 +192,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'random
+   dotspacemacs-startup-banner 'official
 
    ;; Scale factor controls the scaling (size) of the startup banner. Default
    ;; value is `auto' for scaling the logo automatically to fit all buffer
@@ -251,8 +251,9 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(monokai
+   dotspacemacs-themes '(
                          spacemacs-dark
+                         monokai
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -493,7 +494,7 @@ It should only modify the values of Spacemacs settings."
    ;; performance issues, instead of calculating the frame title by
    ;; `spacemacs/title-prepare' all the time.
    ;; (default "%I@%S")
-   dotspacemacs-frame-title-format "%t..%b"
+   dotspacemacs-frame-title-format "[%t]%b"
 
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
@@ -580,25 +581,19 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (if (eq system-type 'darwin)
-    ;; something for OS X 
-    (setq w32-apps-modifier 'super)       ; 通过SharpKeys改成了 Application 
-    )
+  (setq byte-compile-warnings '(not obsolete))
   (if (or (eq system-type 'ms-dos) (eq system-type 'windows-nt))
+    ;; something for OS X 
+    (setq w32-apps-modifier 'super))       ; 通过SharpKeys改成了 Application 
+  (if (eq system-type 'darwin)
       ;; something for windows 
       (setq mac-option-modifier 'meta
-            mac-command-modifier 'super)
-      )
-  ;;(if (eq system-type 'gnu/linux)
-  ;;    )
+            mac-command-modifier 'super))
   (menu-bar-mode t)
-  (global-set-key (kbd "s-a") 'mark-whole-buffer) ;;对应Windows上面的Ctrl-a 全选
-  (global-set-key (kbd "s-c") 'kill-ring-save) ;;对应Windows上面的Ctrl-c 复制
-  (global-set-key (kbd "s-s") 'save-buffer) ;; 对应Windows上面的Ctrl-s 保存
-  (global-set-key (kbd "s-v") 'yank) ;对应Windows上面的Ctrl-v 粘贴
-  (global-set-key (kbd "s-z") 'undo) ;对应Windows上面的Ctrol-z 撤销
-  (global-set-key (kbd "s-x") 'kill-region) ;对应Windows上面的Ctrol-x 剪切
-)
+  )
+(setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+(load custom-file 'no-error 'no-message)
+
 
 
 (defun dotspacemacs/emacs-custom-settings ()
