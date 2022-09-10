@@ -63,7 +63,8 @@ This function should only modify configuration layer settings."
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
-     spell-checking
+     semantic
+     imenu-list
      syntax-checking
      treemacs
      googoo)

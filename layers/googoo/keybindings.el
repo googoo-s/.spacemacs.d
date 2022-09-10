@@ -11,6 +11,7 @@
 (global-set-key (kbd "s-f") 'spacemacs/helm-buffers-smart-do-search-region-or-symbol)
 (global-set-key (kbd "s-F") 'spacemacs/helm-project-smart-do-search-region-or-symbol)
 (global-set-key (kbd "s-p") 'spacemacs/helm-persp-switch-project)
+(global-set-key (kbd "s-<f11>") 'imenu)
 
 (global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "s-n") 'spacemacs/switch-to-scratch-buffer)
@@ -19,6 +20,7 @@
 (global-set-key (kbd "s-o") 'magit-status)
 (global-set-key (kbd "s-1") 'spacemacs/treemacs-project-toggle)
 (global-set-key (kbd "s-3") 'helm-resume)
+(global-set-key (kbd "s-7") 'imenu-list)
 (global-set-key (kbd "s-<f12>") 'spacemacs/default-pop-shell)
 
 
