@@ -42,6 +42,9 @@ This function should only modify configuration layer settings."
      auto-completion
      better-defaults
      emacs-lisp
+     ranger
+     emoji
+     colors
      git
      lsp
      dap
@@ -50,16 +53,21 @@ This function should only modify configuration layer settings."
      python
      django
      markdown
+     yaml
+     (org :variables org-want-todo-bindings t
+          org-enable-hugo-support t
+          org-enable-valign t
+          org-enable-org-journal-support t
+          org-enable-roam-support nil)
      multiple-cursors
-     org
-     docker
-     kubernetes
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
      spell-checking
      syntax-checking
-     treemacs)
+     treemacs
+     googoo)
+
 
 
    ;; List of additional packages that will be installed without being wrapped
